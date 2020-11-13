@@ -140,16 +140,16 @@ int AntiConv::DetectFace(const cv::Mat & img_src, std::vector<FaceInfo>* faces)
 					face_info.mask_ = (prob > maskThreshold_);
 					//
 					
-					if(prob > maskThreshold_)
-					{
-						double start_time = static_cast<double>(cv::getTickCount());
-						std::cout << "score: " << score << std::endl;
-						std::cout << "mask probability: " << prob <<std::endl;
-						std::cout << "-----------------------------" << std::endl;
-						double end_time = static_cast<double>(cv::getTickCount());
-						double total = (end_time-start_time) / cv::getTickFrequency() * 1000;
-						std::cout << "Timr print: " << total << "ms" << std::endl;
-					}
+					// if(prob > maskThreshold_)
+					// {
+					// 	double start_time = static_cast<double>(cv::getTickCount());
+					// 	std::cout << "score: " << score << std::endl;
+					// 	std::cout << "mask probability: " << prob <<std::endl;
+					// 	std::cout << "-----------------------------" << std::endl;
+					// 	double end_time = static_cast<double>(cv::getTickCount());
+					// 	double total = (end_time-start_time) / cv::getTickFrequency() * 1000;
+					// 	std::cout << "Timr print: " << total << "ms" << std::endl;
+					// }
 					face_info.location_ = curr_box;
 					faces_tmp.push_back(face_info);
 				}

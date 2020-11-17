@@ -8,15 +8,11 @@ message(${SRC_FILES})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -std=c++11 -fopenmp")
 add_library(VisionEngine STATIC ${SRC_FILES})
 
-if(MSVC)
-	target_link_libraries(VisionEngine PUBLIC opencv_world344 ncnn)
-else()
-	find_package(OpenCV)
-	message("Opencv Version: ${OPENCV_VERSION}" )
-	include_directories(${CMAKE_SOURCE_DIR}/include/linux)
-	link_directories(${CMAKE_SOURCE_DIR}/lib/linux)
-	target_link_libraries(VisionEngine PUBLIC ${OpenCV_LIBS} ncnn)
-endif()
+find_package(OpenCV)
+message("Opencv Version: ${OPENCV_VERSION}" )
+include_directories(${CMAKE_SOURCE_DIR}/ncnn/include)
+link_directories(${CMAKE_SOURCE_DIR}/ncnn/lib)
+target_link_libraries(VisionEngine PUBLIC ${OpenCV_LIBS} ncnn)
 
 if(MIRROR_OPENMP)
     find_package(OpenMP)
@@ -30,11 +26,7 @@ if(MIRROR_OPENMP AND OpenMP_CXX_FOUND)
     target_link_libraries(VisionEngine PUBLIC OpenMP::OpenMP_CXX)
 endif()
 
-if(MIRROR_VULKAN)
-    find_package(Vulkan REQUIRED)
-    target_link_libraries(VisionEngine PUBLIC Vulkan::Vulkan)
-endif()
-
+#
 target_include_directories(VisionEngine
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>

@@ -70,7 +70,6 @@ int TestMask(int argc, char* argv[], const char* root_path, const char* test_dir
 					int y = faces[i].location_.y;
 					putText(img_src, confidence, cv::Point2f(x, y), cv::FONT_HERSHEY_PLAIN, 2,  cv::Scalar(0,0,255), 2);
 				}
-
 				// define output
 				std::string output_path = output + + "/" + std::string(img_file);
 
